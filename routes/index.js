@@ -7,3 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+
+var dbController = require('../controllers/database.js');
+
+router.get('/getAllOrders', dbController.getAllOrders);
