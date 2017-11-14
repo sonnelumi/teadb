@@ -22,7 +22,7 @@ module.exports.getAllOrders = function (request, response) {
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
         //   this request and loop  is to display content in the  console log
-        var c = Routes.find({});
+        var c = Orders.find({});
 
         c.forEach(
             function(myDoc) {
