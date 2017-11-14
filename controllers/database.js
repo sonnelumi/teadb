@@ -18,8 +18,7 @@ module.exports.getAllOrders = function (request, response) {
         if(err) throw err;
 
         //get collection of routes
-        var Routes = db.collection('Orders');
-
+        var Orders = db.collection('Orders');
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
         //   this request and loop  is to display content in the  console log
@@ -34,11 +33,10 @@ module.exports.getAllOrders = function (request, response) {
 
         // SECOND -show another way to make request for ALL Routes  and simply collect the  documents as an
         //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
-        Routes.find().toArray(function (err, docs) {
+        Orders.find().toArray(function (err, docs) {
             if(err) throw err;
 
             response.render('getAllOrders', {results: docs});
-
         });
 
         //close connection when your app is terminating.
