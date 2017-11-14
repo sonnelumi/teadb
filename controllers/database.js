@@ -37,7 +37,7 @@ module.exports.getAllOrders = function (request, response) {
         Routes.find().toArray(function (err, docs) {
             if(err) throw err;
 
-            response.render('getAllRoutes', {results: docs});
+            response.render('getAllOrders', {results: docs});
 
         });
 
