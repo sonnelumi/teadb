@@ -11,3 +11,5 @@ module.exports = router;
 var dbController = require('../controllers/database.js');
 
 router.get('/getAllOrders', dbController.getAllOrders);
+
+router.post('/storeData', dbController.storeData);
