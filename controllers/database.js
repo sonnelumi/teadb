@@ -54,27 +54,21 @@ module.exports.storeData = function (request, response) {
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
+        var body = JSON.stringify(request.body);
+
+        var seedData = [
+            {
+                decade: '1970s',
+                artist: 'Debby  Boone',
+                song: 'You Light  Up My Life',
+                weeksAtOne: 10
+            }
+        ];
+
         //get collection of routes
         var Orders = db.collection('Orders');
 
-        //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
-        //   this request and loop  is to display content in the  console log
-        var c = Orders.find({});
-
-        c.forEach(
-            function (myDoc) {
-                console.log("name: " + myDoc.name);  //just  loging the output to the console
-            }
-        );
-
-
-        // SECOND -show another way to make request for ALL Routes  and simply collect the  documents as an
-        //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
-        Orders.find().toArray(function (err, docs) {
-            if (err) throw err;
-
-            response.render('getAllOrders', {results: docs});
-        });
+        response.render('storeOrder', {body: body});
 
         //close connection when your app is terminating.
         db.close(function (err) {
