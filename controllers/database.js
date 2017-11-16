@@ -61,6 +61,8 @@ module.exports.storeData = function (request, response) {
         // have to call four  different collections
 
         console.log(body);
+
+        console.log(JSON.parse(body));
         var customerData =
             {
                 _id: customerID,
