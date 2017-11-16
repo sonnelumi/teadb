@@ -132,8 +132,10 @@ module.exports.storeData = function (request, response) {
             if (err) throw err;
         });
 
+        console.log(body.productVector);
         body.productVector = JSON.parse(body.productVector);
 
+        console.log(body.productVector);
         response.render('storeOrder', {summary: body});
 
         //close connection when your app is terminating.
