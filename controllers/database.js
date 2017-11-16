@@ -48,25 +48,90 @@ module.exports.getAllOrders = function (request, response) {
 
 
 module.exports.storeData = function (request, response) {
-
-    console.log(request);
-
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
 
+        // autogenerate ids because retrieve_id info doesn't seem to function on heroku
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+
         var body = JSON.stringify(request.body);
 
-        var seedData = [
-            {
-                decade: '1970s',
-                artist: 'Debby  Boone',
-                song: 'You Light  Up My Life',
-                weeksAtOne: 10
-            }
-        ];
+        // have to call four  different collections
 
-        //get collection of routes
+        var customerData =
+            {
+                _id: customerID,
+                firstName: body.firstName,
+                lastName: body.lastName,
+                streetAddress: body.streetAddress,
+                streetAddress2: body.streetAddress2,
+                city: body.city,
+                state: body.state,
+                zip: body.zip,
+                email: body.email
+            };
+
+        var Customers = db.collection('Customers');
+
+        Customers.insertOne(customerData, function (err, result) {
+            if (err) throw err;
+        });
+
+        var billingData =
+            {
+                _id: billingID,
+                customerID: customerID,
+                creditCardNumber: body.creditCardNumber,
+                creditCardType: body.creditCardType,
+                creditCardExpiration: body.creditCardExpiration,
+                creditCardName: body.creditCardName
+            };
+
+        var Billing = db.collection('Billing');
+
+        Billing.insertOne(billingData, function (err, result) {
+            if (err) throw err;
+        });
+
+        var shippingData =
+            {
+                _id: shippingID,
+                customerID: customerID,
+                streetAddress: body.streetAddress,
+                streetAddress2: body.streetAddress2,
+                city: body.city,
+                state: body.state,
+                zip: body.zip
+            };
+
+
+        var Shipping = db.collection('Shipping');
+
+        Shipping.insertOne(shippingData, function (err, result) {
+            if (err) throw err;
+        });
+
+        var date = new Date();
+
+        body.productVector = JSON.parse(body.productVector);
+        var orderData =
+            {
+                customerID: customerID,
+                billingID: billingID,
+                shippingID: shippingID,
+                date: date.toDateString(),
+                productVector: body.productVector,
+                orderTotal: body.orderTotal
+            };
+
+        //get collection of orders
         var Orders = db.collection('Orders');
+
+        Shipping.insertOne(orderData, function (err, result) {
+            if (err) throw err;
+        });
 
         response.render('storeOrder', {body: body});
 
