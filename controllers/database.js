@@ -56,13 +56,10 @@ module.exports.storeData = function (request, response) {
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
-        var body = JSON.stringify(request.body);
+        var body = JSON.parse(JSON.stringify(request.body));
 
         // have to call four  different collections
 
-        console.log(body);
-
-        console.log(JSON.parse(body));
         var customerData =
             {
                 _id: customerID,
