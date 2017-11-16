@@ -115,7 +115,8 @@ module.exports.storeData = function (request, response) {
 
         var date = new Date();
 
-        body.productVector = JSON.parse(body.productVector);
+        console.log(body.productVector);
+        // body.productVector = JSON.parse(body.productVector);
         var orderData =
             {
                 customerID: customerID,
