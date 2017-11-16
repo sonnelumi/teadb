@@ -48,9 +48,117 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <h2 class="text-center">Thank you for your purchase!
-        <br><br><%= body %>
-        <a class="btn btn-primary" href="index.php">Continue Browsing</a></h2>
+    <h2 class="text-center">Thank you for your purchase!</h2>
+    <br><br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Your Information</h4>
+
+            <dl class="dl-horizontal">
+                <dt>Name</dt>
+                <dd><%= summary.firstName %> <%= summary.lastName %></dd>
+                <dt>Phone</dt>
+                <dd><%= summary.phone %></dd>
+                <dt>Email</dt>
+                <dd><%= summary.email %></dd>
+                <dt>Shipping Address</dt>
+                <dd><%= summary.shippingAddress %></dd>
+                <dt>Billing Address</dt>
+                <dd><%= summary.billingAddressFull %></dd>
+            </dl>
+
+        </div>
+
+        <div class="col-sm-6">
+
+            <h4>Payment Information</h4>
+            <dl class="dl-horizontal">
+                <dt>Name on Card</dt>
+                <dd><%= summary.creditCardName %></dd>
+                <dt>Credit Card Number</dt>
+                <dd><%= summary.creditCardNumber %></dd>
+                <dt>Type</dt>
+                <dd><%= summary.creditCardType %></dd>
+                <dt>Expiration Date</dt>
+                <dd><%= summary.creditCardExpiration %></dd>
+            </dl>
+        </div>
+
+    </div>
+
+
+    <h4>Order Summary</h4>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Detail</th>
+            <th>Total</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        <% summary.productVector.forEach(function(r) { %>
+
+        <tr>
+            <td style="vertical-align:middle">
+                <h4><img src="img/<% r.code %>.jpg" class="img-rounded" style="max-height: 100px"> &nbsp; <a
+                            href="product<% r.code %>.html">
+                        <% r.name %>
+                    </a>
+                    <small>3 oz.</small>
+                </h4>
+            </td>
+            <td>
+                <div class="help-block">3 oz.<br>$
+                    <% r.price %>
+                    <br>
+                    Quantity:
+                    <% r.quantity %>
+                </div>
+            </td>
+            <td style="vertical-align:middle"></td>
+        </tr>
+
+        <% }); %>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <th>Subtotal</th>
+            <td>$
+                <% summary.orderTotal %>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <th>Tax</th>
+            <td>
+                <% summary.tax %>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <th>Shipping</th>
+            <td>
+                <% summary.deliveryCost %>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <th>Grand Total</th>
+            <th>
+                <% summary.grandTotal %>
+            </th>
+        </tr>
+        </tfoot>
+
+    </table>
+    <br>
+    <a class="btn btn-primary" href="index.php">Continue Browsing</a>
 
 
 </div>

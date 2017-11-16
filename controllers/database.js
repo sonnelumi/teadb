@@ -115,8 +115,6 @@ module.exports.storeData = function (request, response) {
 
         var date = new Date();
 
-        console.log(body.productVector);
-        // body.productVector = JSON.parse(body.productVector);
         var orderData =
             {
                 customerID: customerID,
@@ -130,11 +128,13 @@ module.exports.storeData = function (request, response) {
         //get collection of orders
         var Orders = db.collection('Orders');
 
-        Shipping.insertOne(orderData, function (err, result) {
+        Orders.insertOne(orderData, function (err, result) {
             if (err) throw err;
         });
 
-        response.render('storeOrder', {body: body});
+        body.productVector = JSON.parse(body.productVector);
+
+        response.render('storeOrder', {summary: body});
 
         //close connection when your app is terminating.
         db.close(function (err) {
