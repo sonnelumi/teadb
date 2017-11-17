@@ -133,6 +133,14 @@ module.exports.storeData = function (request, response) {
         });
 
         console.log(body.productVector);
+
+        body.productVector.forEach(function (r) {
+            console.log(r);
+            console.log(r.code);
+            console.log(r.quantity);
+            console.log(r.name);
+        });
+
         body.productVector = JSON.parse(body.productVector);
 
         console.log(body.productVector);
