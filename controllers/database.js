@@ -139,9 +139,9 @@ module.exports.storeData = function (request, response) {
         console.log(productVector);
         for (var product in productVector) {
             console.log(product);
-            console.log(product.code);
-            console.log(product.quantity);
-            console.log(product.name);
+            console.log(product['code']);
+            console.log(product['quantity']);
+            console.log(product['name']);
         }
 
         response.render('storeOrder', {summary: body, products: productVector});
