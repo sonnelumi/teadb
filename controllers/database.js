@@ -134,12 +134,13 @@ module.exports.storeData = function (request, response) {
 
         console.log(body.productVector);
 
-        body.productVector.forEach(function (r) {
-            console.log(r);
-            console.log(r.code);
-            console.log(r.quantity);
-            console.log(r.name);
-        });
+        for (var product in body.productVector) {
+
+            console.log(product);
+            console.log(product.code);
+            console.log(product.quantity);
+            console.log(product.name);
+        }
 
         body.productVector = JSON.parse(body.productVector);
 
