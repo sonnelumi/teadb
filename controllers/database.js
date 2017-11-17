@@ -134,7 +134,7 @@ module.exports.storeData = function (request, response) {
 
         console.log(body.productVector);
 
-        var productVector = body.productVector;
+        var productVector = JSON.parse(body.productVector);
 
         for (var product in productVector) {
 
