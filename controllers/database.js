@@ -134,6 +134,8 @@ module.exports.storeData = function (request, response) {
 
         console.log(body.productVector);
 
+        body.productVector = JSON.parse(body.productVector);
+
         for (var product in body.productVector) {
 
             console.log(product);
@@ -142,9 +144,6 @@ module.exports.storeData = function (request, response) {
             console.log(product.name);
         }
 
-        body.productVector = JSON.parse(body.productVector);
-
-        console.log(body.productVector);
         response.render('storeOrder', {summary: body});
 
         //close connection when your app is terminating.
