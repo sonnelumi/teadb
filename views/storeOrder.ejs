@@ -104,19 +104,19 @@
         <% products.forEach(function(r) { %>
         <tr>
             <td style="vertical-align:middle">
-                <h4><img src="img/<% r['code'] %>.jpg" class="img-rounded" style="max-height: 100px"> &nbsp; <a
-                            href="product<% r['code'] %>.html">
-                        <% r['name'] %>
+                <h4><img src="img/<%= r['code'] %>.jpg" class="img-rounded" style="max-height: 100px"> &nbsp; <a
+                            href="product<%= r['code'] %>.html">
+                        <%= r['name'] %>
                     </a>
                     <small>3 oz.</small>
                 </h4>
             </td>
             <td>
                 <div class="help-block">3 oz.<br>$
-                    <% r['price'] %>
+                    <%= r['price'] %>
                     <br>
                     Quantity:
-                    <% r['quantity'] %>
+                    <%= r['quantity'] %>
                 </div>
             </td>
             <td style="vertical-align:middle"></td>
@@ -128,28 +128,28 @@
             <td></td>
             <th>Subtotal</th>
             <td>$
-                <% summary.orderTotal %>
+                <%= summary.orderTotal %>
             </td>
         </tr>
         <tr>
             <td></td>
             <th>Tax</th>
             <td>
-                <% summary.tax %>
+                <%= summary.tax %>
             </td>
         </tr>
         <tr>
             <td></td>
             <th>Shipping</th>
             <td>
-                <% summary.deliveryCost %>
+                <%= summary.deliveryCost %>
             </td>
         </tr>
         <tr>
             <td></td>
             <th>Grand Total</th>
             <th>
-                <% summary.grandTotal %>
+                <%= summary.grandTotal %>
             </th>
         </tr>
         </tfoot>
